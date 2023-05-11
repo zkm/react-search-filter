@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -9,15 +9,16 @@ function App() {
     return item.toLowerCase().includes(query.toLowerCase());
   });
 
-  function onSubmit(e) {
-    e.preventDefault();
-    const value = inputRef.current.value;
-    if (value === "") return;
-    setItems((prev) => {
-      return [...prev, value];
-    });
-    inputRef.current.value = "";
-  }
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      const value = inputRef.current.value;
+      if (value === "") return;
+      setItems((prev) => [...prev, value]);
+      inputRef.current.value = "";
+    },
+    [inputRef]
+  );
 
   return (
     <>
@@ -34,8 +35,8 @@ function App() {
         <button>Add</button>
       </form>
       <h3>Items:</h3>
-      {filteredItems.map((item) => (
-        <div>{item}</div>
+      {filteredItems.map((item, index) => (
+        <div key={index}>{item}</div>
       ))}
     </>
   );
