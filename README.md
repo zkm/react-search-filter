@@ -55,3 +55,7 @@ Build and serve locally:
 - npm run start
 
 Static routes are pre-rendered during `next build`.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
