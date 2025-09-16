@@ -66,19 +66,3 @@ Build and serve locally:
 - yarn start
 
 Static routes are pre-rendered during `next build`.
-
-## GitHub Pages
-
-This repo is configured to deploy to GitHub Pages at:
-- https://zkm.github.io/react-search-filter/
-
-How it works:
-- next.config.mjs uses `output: 'export'`, and sets `basePath` and `assetPrefix` to `/react-search-filter` in production.
-- A GitHub Actions workflow (`.github/workflows/deploy.yml`) builds and uploads the `out/` directory to Pages.
-
-Manual trigger or on push to `main`:
-- Push to `main`, or run the workflow from the Actions tab.
-
-Notes:
-- Don’t add a project-level `.babelrc` (Next needs SWC). Babel is scoped to Jest transforms only.
-- If assets don’t load on Pages, confirm basePath/assetPrefix match the repo name.
