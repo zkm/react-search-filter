@@ -2,16 +2,44 @@
 "use client";
 
 import React from "react";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 export default function Page() {
   const [items, setItems] = useState([]);
   const [query, setQuery] = useState("");
   const [newItem, setNewItem] = useState("");
+  const hasHydrated = useRef(false);
 
   const filteredItems = items.filter((item) => {
     return item.toLowerCase().includes(query.toLowerCase());
   });
+
+  // Hydrate from localStorage on first mount
+  useEffect(() => {
+    try {
+      if (typeof window !== "undefined") {
+        const raw = localStorage.getItem("rsf-items");
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            setItems(parsed);
+          }
+        }
+      }
+    } catch {}
+    // mark hydration complete (even if nothing was stored)
+    hasHydrated.current = true;
+  }, []);
+
+  // Persist to localStorage whenever items change (after hydration)
+  useEffect(() => {
+    if (!hasHydrated.current) return;
+    try {
+      if (typeof window !== "undefined") {
+        localStorage.setItem("rsf-items", JSON.stringify(items));
+      }
+    } catch {}
+  }, [items]);
 
   const onSubmit = useCallback(
     (e) => {
