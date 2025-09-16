@@ -2,6 +2,11 @@
 
 # dependencies
 /node_modules
+# Lockfiles (use Yarn)
+package-lock.json
+pnpm-lock.yaml
+
+# Yarn (legacy) - not used
 /.pnp
 .pnp.*
 .yarn/*
