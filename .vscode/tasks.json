@@ -1,0 +1,40 @@
+{
+    "$schema": "https://json.schemastore.org/tasks.json",
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start Dev Server (yarn)",
+            "type": "shell",
+            "command": "yarn",
+            "args": [
+                "dev"
+            ],
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "pattern": {
+                        "regexp": ".*",
+                        "file": 1,
+                        "location": 1,
+                        "message": 0
+                    },
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": ".*ready - started server on.*",
+                        "endsPattern": ".*Local:   http://localhost:3000.*"
+                    }
+                }
+            ]
+        },
+        {
+            "label": "Start Dev Server (yarn)",
+            "type": "shell",
+            "command": "yarn",
+            "args": [
+                "dev"
+            ],
+            "isBackground": true,
+            "group": "build"
+        }
+    ]
+}

@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# React Search Filter (Next.js)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple search-and-filter app built with Next.js (App Router) and Tailwind CSS. You can add items to a list and filter them live by typing in the search box. The app includes linting and tests with Jest and React Testing Library.
 
-## Available Scripts
+## Tech Stack
 
-In the project directory, you can run:
+- Next.js 15 (App Router)
+- React 19
+- Tailwind CSS v4
+- ESLint (with `eslint-config-next`)
+- Jest + React Testing Library
 
-### `npm start`
+## Requirements
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Node.js 18.18+ or 20+
+- Yarn 1.x
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started (Development)
 
-### `npm test`
+1. Install dependencies:
+   - yarn install
+2. Start the dev server:
+   - yarn dev
+3. Open http://localhost:3000
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You can start editing the UI in `src/app/page.js`. Tailwind styles live in `src/app/globals.css`.
 
-### `npm run build`
+## Scripts
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- yarn dev: Start Next.js in development
+- yarn build: Create a production build
+- yarn start: Serve the production build
+- yarn test: Run unit/integration tests (Jest + RTL)
+- yarn lint: Lint the codebase with ESLint
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## VS Code Tasks
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This repo includes a task to run the dev server. In VS Code:
+- Terminal → Run Task… → Start Dev Server (yarn)
 
-### `npm run eject`
+## Testing
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Uses Jest (jsdom) and React Testing Library
+- Tests are in the `__tests__` directory
+- Run with: yarn test
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Linting
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- ESLint is configured via `eslint-config-next`
+- Run with: yarn lint
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Styling (Tailwind CSS)
 
-## Learn More
+- Tailwind v4 with PostCSS configured via `@tailwindcss/postcss`
+- Config files: `tailwind.config.js`, `postcss.config.mjs`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Troubleshooting
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Builds require Next.js to use SWC (no project-level `.babelrc`). Babel is scoped to Jest via the `transform` setting in `jest.config.js`.
+- If you see PostCSS/Tailwind plugin errors, ensure `@tailwindcss/postcss` is listed in `postcss.config.mjs` and Tailwind is v4.
 
-### Code Splitting
+## Deploy
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Build and serve locally:
+- yarn build
+- yarn start
 
-### Analyzing the Bundle Size
+Static routes are pre-rendered during `next build`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## GitHub Pages
 
-### Making a Progressive Web App
+This repo is configured to deploy to GitHub Pages at:
+- https://zkm.github.io/react-search-filter/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+How it works:
+- next.config.mjs uses `output: 'export'`, and sets `basePath` and `assetPrefix` to `/react-search-filter` in production.
+- A GitHub Actions workflow (`.github/workflows/deploy.yml`) builds and uploads the `out/` directory to Pages.
 
-### Advanced Configuration
+Manual trigger or on push to `main`:
+- Push to `main`, or run the workflow from the Actions tab.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Notes:
+- Don’t add a project-level `.babelrc` (Next needs SWC). Babel is scoped to Jest transforms only.
+- If assets don’t load on Pages, confirm basePath/assetPrefix match the repo name.
