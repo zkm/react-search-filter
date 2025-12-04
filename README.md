@@ -35,6 +35,7 @@ You can start editing the UI in `src/app/page.js`. Tailwind styles live in `src/
 ## VS Code Tasks
 
 This repo includes a task to run the dev server. In VS Code:
+
 - Terminal → Run Task… → Start Dev Server
 
 ## Testing
@@ -51,6 +52,7 @@ This repo includes a task to run the dev server. In VS Code:
 ## Deploy
 
 Build and serve locally:
+
 - npm run build
 - npm run start
 

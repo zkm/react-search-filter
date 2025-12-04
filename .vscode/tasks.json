@@ -1,13 +1,13 @@
 {
-    "$schema": "https://json.schemastore.org/tasks.json",
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Start Dev Server (yarn)",
-            "type": "shell",
-            "command": "yarn dev",
-            "problemMatcher": [],
-            "group": { "kind": "build", "isDefault": true }
-        }
-    ]
+  "$schema": "https://json.schemastore.org/tasks.json",
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Dev Server (yarn)",
+      "type": "shell",
+      "command": "yarn dev",
+      "problemMatcher": [],
+      "group": { "kind": "build", "isDefault": true }
+    }
+  ]
 }

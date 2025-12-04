@@ -1,9 +1,6 @@
-
-
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Page from '../src/app/page';
+import Page from '../src/app/page'; // eslint-disable-line no-unused-vars
 
 describe('React Search Filter', () => {
   it('adds items and filters them', async () => {
