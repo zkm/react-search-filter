@@ -24,6 +24,8 @@ jobs:
           node-version: 20
           cache: yarn
           cache-dependency-path: yarn.lock
+      - run: corepack enable
+      - run: corepack prepare yarn@4.10.3 --activate
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Build (static export)
