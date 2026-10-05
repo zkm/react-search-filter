@@ -19,15 +19,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Before setup-node, so its `yarn cache dir` runs through corepack (yarn 4 via packageManager)
+      - run: corepack enable
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: yarn
           cache-dependency-path: yarn.lock
-      - run: corepack enable
-      - run: corepack prepare yarn@4.10.3 --activate
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Build (static export)
         run: yarn build
       - name: Upload artifact
