@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -11,7 +13,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  # PRs only build and test; their own group keeps them from cancelling a deploy
+  group: ${{ github.event_name == 'pull_request' && format('pages-pr-{0}', github.ref) || 'pages' }}
   cancel-in-progress: true
 
 jobs:
@@ -28,14 +31,18 @@ jobs:
           cache-dependency-path: yarn.lock
       - name: Install
         run: yarn install --immutable
+      - name: Test
+        run: yarn test
       - name: Build (static export)
         run: yarn build
       - name: Upload artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: out
   deploy:
     needs: build
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
