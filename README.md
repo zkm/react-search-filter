@@ -15,7 +15,7 @@ A simple search-and-filter app built with Next.js (App Router) and Tailwind CSS.
 
 ## Tech Stack
 
-- Next.js 15 (App Router)
+- Next.js 16 (App Router)
 - React 19
 - Tailwind CSS v4
 - ESLint (with `eslint-config-next`)
@@ -23,7 +23,7 @@ A simple search-and-filter app built with Next.js (App Router) and Tailwind CSS.
 
 ## Requirements
 
-- Node.js 18.18+ or 20+
+- Node.js 20.9+
 
 ## Getting Started (Development)
 
